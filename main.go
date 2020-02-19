@@ -70,7 +70,7 @@ func main() {
 	store := storage.Storage(disk.Open(conf.Storage.Directory, conf.Tables.Timeseries.Name, monitor))
 
 	// if compact store is enabled then use the compact store
-	if conf.Storage.S3Compact != nil {
+	if conf.Storage.S3Compact.Enabled {
 		store = s3compact.New(conf.Storage.S3Compact, monitor, store)
 	}
 

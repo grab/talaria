@@ -53,6 +53,7 @@ type Nodes struct {
 
 // S3Compact stores the config for s3 compaction
 type S3Compact struct {
+	Enabled bool `json:"enabled" yaml:"enabled" env:"ENABLED"`
 }
 
 // Storage is the location to write the data
