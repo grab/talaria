@@ -37,7 +37,7 @@ func (l *stdLogger) Errorf(f string, v ...interface{}) {
 }
 
 func (l *stdLogger) Warningf(f string, v ...interface{}) {
-	l.stderr.Printf("[warning]: "+f, v...)
+	l.stderr.Printf("[warning] "+f, v...)
 }
 
 func (l *stdLogger) Infof(f string, v ...interface{}) {

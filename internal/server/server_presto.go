@@ -87,12 +87,15 @@ func (s *Server) PrestoGetTableMetadata(schemaTableName *presto.PrestoThriftSche
 	}
 
 	// Prepare metadata result
-	return &presto.PrestoThriftNullableTableMetadata{
+	res := &presto.PrestoThriftNullableTableMetadata{
 		TableMetadata: &presto.PrestoThriftTableMetadata{
 			SchemaTableName: &presto.PrestoThriftSchemaTableName{SchemaName: s.conf().Readers.Presto.Schema, TableName: table.Name()},
 			Columns:         columns,
 		},
-	}, nil
+	}
+	s.monitor.Info("PrestoGetTableMetadata returns result with table name: %#v", res.TableMetadata.SchemaTableName)
+
+	return res, nil
 }
 
 // PrestoListSchemaNames returns available schema names.
