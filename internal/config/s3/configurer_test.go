@@ -24,6 +24,8 @@ func TestConfigure(t *testing.T) {
 
 	var down downloadMock
 	down = func(ctx context.Context, bucket, prefix string, updatedSince time.Time) ([]byte, error) {
+		assert.Contains(t, []string{"conf-server-conf-stg.json", "abc_schema.yaml"}, prefix, "incorrect prefix")
+		assert.Equal(t, "dev-ap-southeast-1-go-app-configs", bucket, "incorrect bucket")
 		return []byte("a: b"), nil
 	}
 	cl, err := newClient(down)
@@ -33,6 +35,7 @@ func TestConfigure(t *testing.T) {
 	}
 
 	err = s3C.Configure(c)
+	assert.Nil(t, c.Storage.S3Compact)
 	assert.Nil(t, err)
 
 }
