@@ -20,7 +20,12 @@ type Configurer struct {
 
 // New creates a new S3 configurer.
 func New() *Configurer {
-	c, _ := newClient(nil)
+	return NewWithClient(nil)
+}
+
+// NewWithClient creates a new S3 configurer with a specified downloader
+func NewWithClient(dl downloader) *Configurer {
+	c, _ := newClient(dl)
 	return &Configurer{
 		client: c,
 	}
