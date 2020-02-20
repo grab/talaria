@@ -5,6 +5,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"os"
 	"os/signal"
 	"strconv"
@@ -59,6 +60,8 @@ func main() {
 
 	// Setup a monitor with a table output
 	monitor := monitor.New(compositeLogger, s, "talaria", conf.Env)
+	configBytes, _ := json.Marshal(conf)
+	monitor.Info("init with config %s", string(configBytes))
 	monitor.Info("starting the log table ...")
 
 	monitor.Count1("system", "event", "type:start")

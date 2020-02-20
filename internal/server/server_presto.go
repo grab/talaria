@@ -93,7 +93,7 @@ func (s *Server) PrestoGetTableMetadata(schemaTableName *presto.PrestoThriftSche
 			Columns:         columns,
 		},
 	}
-	s.monitor.Info("PrestoGetTableMetadata returns result with table name: %#v", res.TableMetadata.SchemaTableName)
+	s.monitor.Info("PrestoGetTableMetadata returns result with table name: %#v", *res.TableMetadata.SchemaTableName)
 
 	return res, nil
 }
