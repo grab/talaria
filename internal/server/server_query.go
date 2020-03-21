@@ -5,6 +5,7 @@ package server
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"github.com/grab/talaria/internal/monitor/errors"
@@ -15,6 +16,7 @@ import (
 
 // Describe returns the list of schema/table combinations and the metadata
 func (s *Server) Describe(ctx context.Context, _ *talaria.DescribeRequest) (*talaria.DescribeResponse, error) {
+	log.Printf("inside the describe ")
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:describe")
 
@@ -48,6 +50,7 @@ func (s *Server) Describe(ctx context.Context, _ *talaria.DescribeRequest) (*tal
 
 // GetSplits returns the list of splits for a particular table/filter combination
 func (s *Server) GetSplits(ctx context.Context, request *talaria.GetSplitsRequest) (*talaria.GetSplitsResponse, error) {
+	log.Printf("inside the get splits")
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:get_splits")
 
