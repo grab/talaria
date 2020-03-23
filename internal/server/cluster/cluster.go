@@ -4,6 +4,7 @@
 package cluster
 
 import (
+	"log"
 	"net"
 	"strconv"
 	"strings"
@@ -50,6 +51,7 @@ func (c *Cluster) Members() (nodes []string) {
 	for _, m := range c.list.Members() {
 		nodes = append(nodes, m.Addr.String())
 	}
+	log.Printf("members are %+v\n", nodes)
 	return
 }
 

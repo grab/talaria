@@ -45,6 +45,7 @@ func main() {
 
 	// Setup gossip
 	gossip := cluster.New(7946)
+	gossip.Members()
 
 	// StatsD
 	s, err := statsd.New(conf.Statsd.Host + ":" + strconv.FormatInt(conf.Statsd.Port, 10))
