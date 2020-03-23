@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"time"
 
 	pb "github.com/grab/talaria/proto"
@@ -91,7 +92,9 @@ func (c *Client) isConnectionInsecure() bool {
 
 // IngestBatch sends a batch of events to Talaria server.
 func (c *Client) IngestBatch(ctx context.Context, batch []Event) error {
+	log.Printf("in ingest with batch %+v\n", batch)
 	encoded := c.encoder.Encode(batch)
+	log.Printf("in ingest after encode %+v\n", encoded)
 
 	req := &pb.IngestRequest{
 		Data: &pb.IngestRequest_Batch{

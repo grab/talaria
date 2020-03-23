@@ -6,6 +6,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"reflect"
 	"time"
 	"unsafe"
@@ -31,6 +32,8 @@ func (e *encoder) Encode(events []Event) *pb.Batch {
 	e.next = 0
 	e.dictionary = make(map[string]uint32, len(events))
 	e.batch = &pb.Batch{Events: make([]*pb.Event, 0, len(events))}
+	log.Printf("in encode with e.batch %+v\n", e.batch)
+	log.Printf("in encode with e.batch.strings %+v\n", e.batch.Strings)
 
 	for _, ev := range events {
 		encoded := e.encodeEvent(ev)
@@ -75,7 +78,10 @@ func (e *encoder) encodeEvent(event Event) *pb.Event {
 
 func (e *encoder) writeDictionary() {
 	e.batch.Strings = make(map[uint32][]byte, len(e.dictionary))
+
+	log.Printf("in write dictionary with e.batch.strings %+v\n", e.batch.Strings)
 	for str, ref := range e.dictionary {
+		log.Printf("in loop write dictionary with e.batch.strings %+v\n", e.batch.Strings)
 		e.batch.Strings[ref] = stringToBinary(str)
 	}
 }
