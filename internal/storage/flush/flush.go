@@ -6,6 +6,7 @@ package flush
 import (
 	"bytes"
 	"compress/flate"
+	"fmt"
 	"sync"
 	"time"
 
@@ -59,6 +60,7 @@ func (s *Storage) Append(key key.Key, value []byte, ttl time.Duration) error {
 func (s *Storage) Merge(blocks []block.Block, schema typeof.Schema) ([]byte, []byte) {
 	orcSchema, err := orc.SchemaFor(schema)
 	if err != nil {
+		fmt.Printf("error in generating orc schema %+v %+v\n", schema, err)
 		s.monitor.Error(errors.Internal("flush: error generating orc schema", err))
 		return nil, nil
 	}
