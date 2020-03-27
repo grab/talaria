@@ -5,6 +5,7 @@ package nodes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net"
 	"time"
 
@@ -81,6 +82,7 @@ func (t *Table) GetSplits(desiredColumns []string, outputConstraint *presto.Pres
 
 // GetRows retrieves the data
 func (t *Table) GetRows(splitID []byte, columns []string, maxBytes int64) (*table.PageResult, error) {
+	fmt.Printf("Get rows of nodes called")
 	result := &table.PageResult{
 		Columns: make([]presto.Column, 0, len(columns)),
 	}

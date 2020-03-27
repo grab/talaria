@@ -5,6 +5,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/grab/talaria/internal/monitor/errors"
@@ -91,6 +92,8 @@ func (s *Server) GetSplits(ctx context.Context, request *talaria.GetSplitsReques
 func (s *Server) GetRows(ctx context.Context, request *talaria.GetRowsRequest) (*talaria.GetRowsResponse, error) {
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:get_rows")
+
+	fmt.Printf("Get rows of server query called")
 
 	// Parse the incoming thriftID
 	id, err := decodeID(request.SplitID, request.NextToken)
