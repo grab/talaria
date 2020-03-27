@@ -125,6 +125,8 @@ func (s *Server) PrestoListTables(schemaNameOrNull *presto.PrestoThriftNullableS
 
 // PrestoGetRows returns a batch of rows for the given split.
 func (s *Server) PrestoGetRows(splitID *presto.PrestoThriftId, columns []string, maxBytes int64, nextToken *presto.PrestoThriftNullableToken) (*presto.PrestoThriftPageResult, error) {
+	fmt.Printf("Get rows of presto  called")
+
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:get_rows")
 
