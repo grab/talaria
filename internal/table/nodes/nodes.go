@@ -68,6 +68,7 @@ func (t *Table) Schema() (typeof.Schema, error) {
 // GetSplits retrieves the splits
 func (t *Table) GetSplits(desiredColumns []string, outputConstraint *presto.PrestoThriftTupleDomain, maxSplitCount int) ([]table.Split, error) {
 
+	fmt.Printf("Get splits of nodes called")
 	// We need to generate as many splits as we have nodes in our cluster. Each split needs to contain the IP address of the
 	// node containing that split, so Presto can reach it and request the data.
 	splits := make([]table.Split, 0, 16)

@@ -49,6 +49,8 @@ func (s *Server) Describe(ctx context.Context, _ *talaria.DescribeRequest) (*tal
 
 // GetSplits returns the list of splits for a particular table/filter combination
 func (s *Server) GetSplits(ctx context.Context, request *talaria.GetSplitsRequest) (*talaria.GetSplitsResponse, error) {
+	fmt.Printf("Get splits of server query called")
+
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:get_splits")
 
