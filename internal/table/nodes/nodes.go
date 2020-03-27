@@ -78,6 +78,7 @@ func (t *Table) GetSplits(desiredColumns []string, outputConstraint *presto.Pres
 			Addrs: []string{m},
 		})
 	}
+	fmt.Printf("Get splits return of nodes called with splits %+v\n", splits)
 	return splits, nil
 }
 

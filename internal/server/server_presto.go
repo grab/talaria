@@ -4,6 +4,7 @@
 package server
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/grab/talaria/internal/monitor/errors"
@@ -17,6 +18,7 @@ func (s *Server) PrestoGetIndexSplits(schemaTableName *presto.PrestoThriftSchema
 
 // PrestoGetSplits returns a batch of splits.
 func (s *Server) PrestoGetSplits(schemaTableName *presto.PrestoThriftSchemaTableName, desiredColumns *presto.PrestoThriftNullableColumnSet, outputConstraint *presto.PrestoThriftTupleDomain, maxSplitCount int32, nextToken *presto.PrestoThriftNullableToken) (*presto.PrestoThriftSplitBatch, error) {
+	fmt.Printf("Get splits of presto called")
 	defer s.handlePanic()
 	defer s.monitor.Duration(ctxTag, funcTag, time.Now(), "func:get_splits")
 
@@ -55,6 +57,8 @@ func (s *Server) PrestoGetSplits(schemaTableName *presto.PrestoThriftSchemaTable
 		}
 		batch.Splits = append(batch.Splits, tsplit)
 	}
+	fmt.Printf("Get splits return of server presto called with splits %+v\n", batch)
+
 	return batch, nil
 }
 

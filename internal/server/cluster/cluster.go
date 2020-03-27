@@ -4,6 +4,7 @@
 package cluster
 
 import (
+	"fmt"
 	"net"
 	"strconv"
 	"strings"
@@ -39,6 +40,7 @@ func New(port int) *Cluster {
 		panic("failed to create gossip memberlist: " + err.Error())
 	}
 
+	fmt.Printf("members list created with list %+v\n", list)
 	return &Cluster{
 		list: list,
 		addr: net.JoinHostPort(cfg.AdvertiseAddr, strconv.FormatInt(int64(cfg.AdvertisePort), 10)),
@@ -47,6 +49,7 @@ func New(port int) *Cluster {
 
 // Members returns the current set of nodes available.
 func (c *Cluster) Members() (nodes []string) {
+	fmt.Printf("get members called")
 	for _, m := range c.list.Members() {
 		nodes = append(nodes, m.Addr.String())
 	}
