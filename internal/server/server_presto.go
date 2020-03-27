@@ -58,6 +58,9 @@ func (s *Server) PrestoGetSplits(schemaTableName *presto.PrestoThriftSchemaTable
 		batch.Splits = append(batch.Splits, tsplit)
 	}
 	fmt.Printf("Get splits return of server presto called with splits %+v\n", batch)
+	for _, sp := range batch.Splits {
+		fmt.Printf("%+v\n", sp)
+	}
 
 	return batch, nil
 }
