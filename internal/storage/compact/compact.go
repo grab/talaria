@@ -22,8 +22,7 @@ var _ storage.Storage = new(Storage)
 
 // Storage represents compactor storage.
 type Storage struct {
-	compact async.Task // The compaction worker
-
+	compact async.Task       // The compaction worker
 	monitor monitor.Monitor  // The monitor client
 	merger  storage.Merger   // The merging (join) function
 	buffer  storage.Storage  // The storage to use for buffering
@@ -148,13 +147,13 @@ func (s *Storage) merge(keys []key.Key, blocks []block.Block, schema typeof.Sche
 		}
 
 		// Merge all blocks together
-		key, value := s.merger.Merge(blocks, schema)
-
-		// Append to the destination
-		ttl := time.Duration(max-now) * time.Second
-		if err = s.dest.Append(key, value, ttl); err != nil {
-			s.monitor.Error(err)
-			return
+		if key, value := s.merger.Merge(blocks, schema); key != nil {
+			// Append to the destination
+			ttl := time.Duration(max-now) * time.Second
+			if err = s.dest.Append(key, value, ttl); err != nil {
+				s.monitor.Error(err)
+				return
+			}
 		}
 
 		//  Delete all of the keys that we have appended
