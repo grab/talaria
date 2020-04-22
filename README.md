@@ -3,6 +3,12 @@
 TalariaDB is a distributed, highly available, and low latency time-series database that stores real-time data. It's built on top of [Badger DB.](https://github.com/dgraph-io/badger)  
 Blog: https://engineering.grab.com/big-data-real-time-presto-talariadb
 
+## Announcement
+
+We've moved! This repository is no longer maintained actively. Feel free to contribute to [Kelindar/Talaria](https://github.com/kelindar/talaria) that is maintained actively.
+
+Grab has migrated to the latest build of that repository and will continue to contribute there.
+
 #### About TalariaDB
 In Grab, millions and millions of transactions and connections take place every day on our platform, which requires data-driven decision making. And these decisions need to be made based on real-time data. For example, an experiment might inadvertently cause a significant increase of waiting time for riders.
   
